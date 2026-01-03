@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Simple Scraper</title>
+</head>
+<body>
+    <h1>Scraped Data</h1>
+    <div id="output">Loading...</div>
+
+    <script>
+        // We use a proxy to bypass CORS restrictions
+        const proxy = "https://api.allorigins.win/get?url=";
+        const target = encodeURIComponent("https://example.com");
+
+        fetch(`${proxy}${target}`)
+            .then(response => response.json())
+            .then(data => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data.contents, "text/html");
+                
+                // Example: Grabbing the first <h1> found on the page
+                const title = doc.querySelector('h1').innerText;
+                document.getElementById('output').innerHTML = `Title found: ${title}`;
+            })
+            .catch(err => {
+                document.getElementById('output').innerHTML = "Error: " + err;
+            });
+    </script>
+</body>
+</html>
