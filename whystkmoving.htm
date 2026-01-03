@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Simple Scraper</title>
+    <title>Why Stock Moving</title>
 </head>
 <body>
-    <h1>Scraped Data</h1>
+    <h1>Why Stock Moving</h1>
     <div id="output">Loading...</div>
 
     <script>
         // We use a proxy to bypass CORS restrictions
         const proxy = "https://api.allorigins.win/get?url=";
-        const target = encodeURIComponent("https://example.com");
+        const target = encodeURIComponent("https://finviz.com/quote.ashx?t=CVX");
 
         fetch(`${proxy}${target}`)
             .then(response => response.json())
@@ -19,8 +19,8 @@
                 const doc = parser.parseFromString(data.contents, "text/html");
                 
                 // Example: Grabbing the first <h1> found on the page
-                const title = doc.querySelector('h1').innerText;
-                document.getElementById('output').innerHTML = `Title found: ${title}`;
+                const scrapedData = doc.querySelector('.js-why-stock-moving-static').innerText;
+                document.getElementById('output').innerHTML = `Data found: ${scrapedData}`;
             })
             .catch(err => {
                 document.getElementById('output').innerHTML = "Error: " + err;
