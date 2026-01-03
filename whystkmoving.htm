@@ -12,8 +12,7 @@
         .ticker-row:last-child { border-bottom: none; }
         .ticker-name { font-weight: bold; color: #333; text-align: left; }
         .ticker-data { color: #307dcc; font-family: monospace; }
-		
-        .error { color: #e74c3c; }
+        .error { color: #e74c3c;  font-family: monospace; }
     </style>
 </head>
 <body>
@@ -51,26 +50,29 @@
                 outputDiv.innerHTML = ""; 
 
                 results.forEach(result => {
-                    const row = document.createElement('div');
-                    row.className = 'ticker-row';
-
-                    if (result.error) {
-                        // row.innerHTML = `<span class="ticker-name">${result.ticker}</span> <span class="error">  </span>`;
+					try {
+	                    const row = document.createElement('div');
+	                    row.className = 'ticker-row';
+	
+	                    if (result.error) {
+	                        row.innerHTML = `<span class="ticker-name">${result.ticker}</span> <span class="error">Error</span>`;
+	                    } else {
+	                        const parser = new DOMParser();
+	                        const doc = parser.parseFromString(result.html, "text/html");
+							
+							// let scrapedData = doc.querySelector('.js-why-stock-moving-static').innerText;
+							// const processedData = scrapedData.replace(/.+:\d\d (AM|PM)/, "$&&nbsp;&nbsp;");
+							const processedData = "Start.  This is some test text.  This is some test text.  This is some test text.  This is some test text.  This is some test text.  End."
+	                        
+	                        row.innerHTML = `
+	                            <span class="ticker-name">${result.ticker}</span><br/>
+	                            <span class="ticker-data">${processedData}</span>
+	                        `;
+	                    }
+					} catch (err) {
 						row.innerHTML = ``;
-                    } else {
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(result.html, "text/html");
-						
-						// let scrapedData = doc.querySelector('.js-why-stock-moving-static').innerText;
-						// const processedData = scrapedData.replace(/.+:\d\d (AM|PM)/, "$&&nbsp;&nbsp;");
-						const processedData = "Start.  This is some test text.  This is some test text.  This is some test text.  This is some test text.  This is some test text.  End."
-                        
-                        row.innerHTML = `
-                            <span class="ticker-name">${result.ticker}</span><br/>
-                            <span class="ticker-data">${processedData}</span>
-                        `;
-                    }
-                    outputDiv.appendChild(row);
+					}
+	                outputDiv.appendChild(row);
                 });
 
             } catch (err) {
