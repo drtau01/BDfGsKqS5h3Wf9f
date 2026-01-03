@@ -8,8 +8,8 @@
         #output { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .ticker-row { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee; }
         .ticker-row:last-child { border-bottom: none; }
-        .ticker-name { font-weight: bold; color: #333; font-size: 1.1em; }
-        .ticker-data { color: #2ecc71; font-family: monospace; font-weight: bold; }
+        .ticker-name { font-weight: bold; color: #333; font-size: 1.1em; padding: 30px; }
+        .ticker-data { color: #307dcc; font-family: monospace; font-weight: bold; }
         .error { color: #e74c3c; }
     </style>
 </head>
@@ -41,7 +41,7 @@
                     row.className = 'ticker-row';
 
                     if (result.error) {
-                        row.innerHTML = `<span class="ticker-name">${result.ticker}</span> <span class="error">Timeout/Error</span>`;
+                        row.innerHTML = `<span class="ticker-name">${result.ticker}</span> <span class="error">  </span>`;
                     } else {
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(result.html, "text/html");
