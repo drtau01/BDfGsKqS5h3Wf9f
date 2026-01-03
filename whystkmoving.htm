@@ -18,8 +18,8 @@
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(data.contents, "text/html");
                 
-                // Example: Grabbing the first <h1> found on the page
-                const scrapedData = doc.querySelector('.js-why-stock-moving-static').innerText;
+                const scrapedData = doc.querySelector('h1').innerText;   // Example: Grabbing the first <h1> found on the page
+                // const scrapedData = doc.querySelector('.js-why-stock-moving-static').innerText;
                 document.getElementById('output').innerHTML = `Data found: ${scrapedData}`;
             })
             .catch(err => {
