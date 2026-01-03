@@ -50,27 +50,34 @@
                 outputDiv.innerHTML = ""; 
 
                 results.forEach(result => {
+					const row = document.createElement('div');
+					row.className = 'ticker-row';
+
 					try {
-	                    const row = document.createElement('div');
-	                    row.className = 'ticker-row';
-	
 	                    if (result.error) {
 	                        row.innerHTML = `<span class="ticker-name">${result.ticker}</span> <span class="error">Error</span>`;
 	                    } else {
 	                        const parser = new DOMParser();
 	                        const doc = parser.parseFromString(result.html, "text/html");
-							
-							// let scrapedData = doc.querySelector('.js-why-stock-moving-static').innerText;
-							// const processedData = scrapedData.replace(/.+:\d\d (AM|PM)/, "$&&nbsp;&nbsp;");
-							const processedData = "Start.  This is some test text.  This is some test text.  This is some test text.  This is some test text.  This is some test text.  End."
-	                        
-	                        row.innerHTML = `
-	                            <span class="ticker-name">${result.ticker}</span><br/>
-	                            <span class="ticker-data">${processedData}</span>
-	                        `;
+
+							try {
+								// let scrapedData = doc.querySelector('.js-why-stock-moving-static').innerText;
+								// const processedData = scrapedData.replace(/.+:\d\d (AM|PM)/, "$&&nbsp;&nbsp;");
+								const processedData = "Start.  This is some test text.  This is some test text.  This is some test text.  This is some test text.  This is some test text.  End."
+		                        
+		                        row.innerHTML = `
+		                            <span class="ticker-name">${result.ticker}</span><br/>
+		                            <span class="ticker-data">${processedData}</span>
+		                        `;
+							} catch (err) {
+								row.innerHTML = ``;
+							}
 	                    }
 					} catch (err) {
-						row.innerHTML = ``;
+						row.innerHTML = `
+							<span class="ticker-name">${result.ticker}</span><br/>
+							<span class="error">"Error: " + err</span>
+						`;
 					}
 	                outputDiv.appendChild(row);
                 });
