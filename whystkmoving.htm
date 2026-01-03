@@ -29,7 +29,7 @@
             
             try {
                 const promises = tickers.map(ticker => 
-                    fetch(`${proxy}${encodeURIComponent(baseUrl + ticker)}`)
+                    fetch(`${proxy}${encodeURIComponent(baseUrl + ticker + "&p=d")}`)
                         .then(res => res.json())
                         .then(data => ({ ticker, html: data.contents }))
                         .catch(err => ({ ticker, error: err }))
