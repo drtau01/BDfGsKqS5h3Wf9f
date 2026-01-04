@@ -52,11 +52,11 @@
                 results.forEach(result => {
 					const row = document.createElement('div');
 					row.className = 'ticker-row';
-					const tickerHeader = '<a href="' + baseUrl + ${result.ticker} + '" target="_blank" rel="noopener noreferrer">' + ${result.ticker} + '</a>'
+					const tickerName = '<a href="' + baseUrl + result.ticker + '" target="_blank" rel="noopener noreferrer">' + result.ticker + '</a>'
 
 					try {
 	                    if (result.error) {
-	                        row.innerHTML = `<span class="ticker-name">tickerHeader</span><br/>
+	                        row.innerHTML = `<span class="ticker-name">${tickerName}</span><br/>
 							<span class="error">Fetch Error</span>`;
 	                    } else {
 	                        const parser = new DOMParser();
@@ -68,7 +68,7 @@
 								// const processedData = "Start.  This is some test text.  This is some test text.  This is some test text.  This is some test text.  This is some test text.  End."
 		                        
 		                        row.innerHTML = `
-		                            <span class="ticker-name">tickerHeader</span><br/>
+		                            <span class="ticker-name">${tickerName}</span><br/>
 		                            <span class="ticker-data">${processedData}</span>
 		                        `;
 							} catch (err) {
@@ -77,7 +77,7 @@
 	                    }
 					} catch (err) {
 						row.innerHTML = `
-							<span class="ticker-name">tickerHeader</span><br/>
+							<span class="ticker-name">${tickerName}</span><br/>
 							<span class="error">"Error: " + err</span>
 						`;
 					}
