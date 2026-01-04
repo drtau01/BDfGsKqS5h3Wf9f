@@ -80,7 +80,7 @@
 							<span class="error">"Error: " + err</span>
 						`;
 					}
-	                outputDiv.appendChild(row);
+					if (row.innerHTML.trim() != "") outputDiv.appendChild(row);
                 });
 
             } catch (err) {
