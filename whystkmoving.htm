@@ -52,7 +52,7 @@
                 results.forEach(result => {
 					const row = document.createElement('div');
 					row.className = 'ticker-row';
-					const tickerHeader = '<a href="' + baseUrl + ${result.ticker} + '">' + ${result.ticker} + '</a>'
+					const tickerHeader = '<a href="' + baseUrl + ${result.ticker} + '" target="_blank" rel="noopener noreferrer">' + ${result.ticker} + '</a>'
 
 					try {
 	                    if (result.error) {
