@@ -57,7 +57,7 @@
 					try {
 	                    if (result.error) {
 	                        row.innerHTML = `<span class="ticker-name">${tickerName}</span><br/>
-							<span class="error">Fetch Error</span>`;
+							<span class="error">Fetch Error:  ${result.error}</span>`;
 	                    } else {
 	                        const parser = new DOMParser();
 	                        const doc = parser.parseFromString(result.html, "text/html");
