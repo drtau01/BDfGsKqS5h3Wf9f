@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Why Stock Is Moving</title>
+</head>
+<body>
+    <h1>Opening sites ...</h1>
+    
+    <script>
+        function openWithTitle(url, customTitle) {
+            // 1. Open a new blank tab
+            var newWin = window.open("about:blank", "_blank");
+            
+            // 2. Write a new document to that tab containing the title and an iframe
+            newWin.document.write(`
+                <html>
+                    <head><title>${customTitle}</title></head>
+                    <body style="margin:0; padding:0; overflow:hidden;">
+                        <iframe src="${url}" style="width:100%; height:100vh; border:none;"></iframe>
+                    </body>
+                </html>
+            `);
+            newWin.document.close();
+        }
+
+        window.onload = function() {
+            // Usage: openWithTitle("URL", "Desired Tab Title")
+            openWithTitle("https://whystkmoving.vercel.app?tickers=NVDA,MSFT,AMZN,META,TWLO,PATH,PYPL,SPY,MA,V,AXP,IBIT,XLU,NFLX", "Holdings");
+            openWithTitle("https://whystkmoving.vercel.app?tickers=SNOW,RDDT,GOOGL,FCX,HD,VKTX", "Hot");
+        };
+    </script>
+</body>
+</html>
